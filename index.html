@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Portal de Aplicaciones - UNICAH</title>
+    <!-- Tailwind CSS con plugins para formularios y consultas de contenedores -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Material Icons y Symbols para iconos de los diseños -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <!-- Configuración personalizada del tema Tailwind para combinar con el diseño institucional -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#4257b3",
+                    "tertiary-fixed": "#ffdad2",
+                    "on-secondary-container": "#725000",
+                    "background": "#fbf9f8",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#b9c3ff",
+                    "surface-dim": "#dcd9d9",
+                    "on-tertiary-container": "#e47459",
+                    "surface-variant": "#e4e2e1",
+                    "primary": "#00104e",
+                    "tertiary": "#370600",
+                    "on-primary-fixed": "#001356",
+                    "on-surface-variant": "#454652",
+                    "surface": "#fbf9f8",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#eae8e7",
+                    "inverse-on-surface": "#f3f0f0",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#b9c3ff",
+                    "outline-variant": "#c5c5d4",
+                    "on-primary-fixed-variant": "#283e9a",
+                    "surface-bright": "#fbf9f8",
+                    "secondary-fixed": "#ffdeaa",
+                    "secondary-fixed-dim": "#f9bc4a",
+                    "on-background": "#1b1c1c",
+                    "primary-container": "#002080",
+                    "outline": "#757683",
+                    "on-tertiary-fixed-variant": "#802914",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#ffc24f",
+                    "tertiary-fixed-dim": "#ffb4a3",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f6f3f2",
+                    "primary-fixed": "#dde1ff",
+                    "secondary": "#7d5700",
+                    "surface-container": "#f0eded",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#5f4100",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#3d0700",
+                    "surface-container-highest": "#e4e2e1",
+                    "on-secondary-fixed": "#271900",
+                    "tertiary-container": "#5c0f00",
+                    "on-primary-container": "#7a8eee",
+                    "on-surface": "#1b1c1c",
+                    "inverse-surface": "#303030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xxl": "48px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "huge": "64px",
+                    "container-max": "1280px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "gutter": "24px",
+                    "xl": "32px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-h1": ["Inter"],
+                    "body-small": ["Inter"],
+                    "headline-h1-mobile": ["Inter"],
+                    "headline-h3": ["Inter"],
+                    "body-main": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-h2": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-h1": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-small": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-h1-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "headline-h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-main": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-h2": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+    <!-- Estilos personalizados premium -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #00104e;
+        }
+    </style>
+</head>
+<body class="bg-[#fbf9f8] min-h-screen flex flex-col justify-between">
+
+    <!-- ==================== PÁGINA DE INICIO (PORTAL GENERAL) ==================== -->
+    <div id="home-screen" class="page-container flex-grow">
+        <!-- Top Bar -->
+        <div class="top-bar flex justify-between items-center bg-[#002080] px-6 py-3 shadow-md h-16">
+            <a href="#" class="flex items-center gap-3">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-10 w-auto">
+            </a>
+            <div class="flex items-center gap-4">
+                <div class="user-info-container flex items-center gap-2 cursor-pointer">
+                    <div id="home-user-name" class="user-name text-white font-medium text-sm">Sasha Flores</div>
+                    <div class="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center text-white">
+                        <i id="home-user-avatar" class="material-icons text-lg">school</i>
+                    </div>
+                </div>
+                <button id="btn-home-logout" class="text-white hover:text-red-400 transition-colors flex items-center bg-white/10 hover:bg-white/20 p-1.5 rounded-lg" title="Cerrar Sesión">
+                    <i class="material-icons text-xl">logout</i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Contenedor Principal de Apps -->
+        <div class="maincontapp max-w-[1200px] mx-auto my-10 px-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-[#002080] mb-2 tracking-tight">Bienvenido</h1>
+            <span class="text-gray-500 text-base md:text-lg">Seleccione el sistema al que desea acceder.</span>
+            
+            <div class="maincontapp-gapps grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10 mb-16">
+                <!-- Aula Virtual -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-semibold text-lg">
+                        Aula Virtual
+                    </div>
+                </a>
+                
+                <!-- Biblioteca Digital McGrawHill -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-semibold text-lg">
+                        Biblioteca Digital McGrawHill
+                    </div>
+                </a>
+                
+                <!-- Biblioteca Hinari -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-semibold text-lg">
+                        Biblioteca Hinari
+                    </div>
+                </a>
+                
+                <!-- Scopus -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-semibold text-lg">
+                        Scopus
+                    </div>
+                </a>
+                
+                <!-- Registro Matrícula -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] border-4 border-white hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-bold text-xl">
+                        Registro Matrícula
+                    </div>
+                </a>
+                
+                <!-- Dignidad Humana -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-semibold text-lg">
+                        Dignidad Humana
+                    </div>
+                </a>
+                
+                <!-- Moodle 2024 (Nuevo) -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-semibold text-lg">
+                        Moodle 2024 (Nuevo)
+                    </div>
+                </a>
+                
+                <!-- Moodle ICB -->
+                <a class="maincontapp-gapps-app relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200" href="#">
+                    <div class="maincontapp-gapps-app-btn text-white text-center font-semibold text-lg">
+                        Moodle ICB
+                    </div>
+                </a>
+                
+                <!-- Portal de Prácticas Profesionales (RESALTADO) -->
+                <a id="portal-practicas-btn" class="portal-app-card relative h-48 rounded-xl overflow-hidden shadow-lg flex flex-col justify-center items-center bg-[#002080] border-4 border-[#DAA520] hover:translate-y-[-4px] hover:shadow-2xl transition-all duration-200 cursor-pointer" href="#login">
+                    <!-- Icono flotante -->
+                    <div class="absolute top-4 left-4 bg-white p-2 rounded-lg shadow-sm flex items-center justify-center">
+                        <i class="material-icons text-[#002080]">school</i>
+                    </div>
+                    <div class="text-center px-4">
+                        <div class="text-white font-bold text-xl mb-1">Prácticas Profesionales</div>
+                        <span class="text-xs text-[#DAA520] font-semibold tracking-wider uppercase">Portal de Pasantías</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== PÁGINA DE ACCESO (LOGIN) ==================== -->
+    <div id="login-screen" class="page-container active flex-grow flex flex-col justify-between">
+        <!-- Top Bar de la pantalla de login -->
+        <div class="top-bar bg-[#002080] px-6 py-3 shadow-md h-16 flex justify-between items-center">
+            <a href="https://unicah.edu/" class="flex items-center">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-9 w-auto">
+            </a>
+            <div class="user-info-container">
+                <div class="menu-icon cursor-pointer text-white p-2 rounded-lg hover:bg-white/10 flex items-center justify-center transition-colors" id="btn-login-menu">
+                    <i class="material-icons text-white text-2xl">reorder</i>
+                </div>
+                <ul class="user-menu" id="user-menu">
+                    <li><a href="https://unicah.edu/">Regresar a UNICAH.EDU</a></li>
+                    <li><a href="https://login.sec.unicah.net/pages/recovery.php">¿Olvide mi contraseña?</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Login Container -->
+        <div class="loginc my-auto">
+            <div class="loginc-l mx-auto">
+                <div class="loginc-l-img">
+                    <svg class="w-20 h-20" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 5 L25 0 L40 5 V20 C40 32 30 42 25 47 C20 42 10 32 10 20 V5 Z" fill="#DAA520" />
+                        <path d="M12 7 L25 2.5 L38 7 V20 C38 31 29 40 25 45 C21 40 12 31 12 20 V7 Z" fill="#002080" />
+                        <path d="M23 11 H27 V33 H23 V11 Z" fill="#DAA520" />
+                        <path d="M16 19 H34 V23 H16 V19 Z" fill="#DAA520" />
+                    </svg>
+                </div>
+
+                <form id="formulariologinunicah" action="/ctrl/login.php" method="post" class="loginc-l-form">
+                    <div class="loginc-l-form-inpgroup">
+                        <label class="titulo" for="UsrUsr" id="label-username">Usuario:</label>
+                        <input name="UsrUsr" id="UsrUsr" type="text" required>
+                    </div>
+                    <div class="loginc-l-form-inpgroup">
+                        <label class="titulo" for="UsrPwd">Contraseña:</label>
+                        <input id="UsrPwd" name="UsrPwd" type="password" required>
+                    </div>
+                    <div class="mensajesform text-xs text-red-500 text-center font-semibold"></div>
+                    <input id="btn-login-submit" class="loginc-l-form-enviar" type="submit" value="Ingresar">
+                </form>
+
+                <a class="loginc-recoverybtn" href="./recovery.php">¿Olvide mi contraseña?</a>
+
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-100"></div>
+                    </div>
+                    <div class="relative flex justify-center text-[10px] uppercase">
+                        <span class="bg-white px-2 text-gray-400 font-bold tracking-wider">Demostración Rápida</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2">
+                    <button class="demo-btn py-1.5 px-1 rounded-lg text-xs font-semibold text-gray-700 flex flex-col items-center gap-1" data-demo-role="estudiante">
+                        <i class="material-icons text-[#002080] text-lg">account_circle</i>
+                        Estudiante
+                    </button>
+                    <button class="demo-btn py-1.5 px-1 rounded-lg text-xs font-semibold text-gray-700 flex flex-col items-center gap-1" data-demo-role="empresa">
+                        <i class="material-icons text-amber-600 text-lg">apartment</i>
+                        Empresa
+                    </button>
+                    <button class="demo-btn py-1.5 px-1 rounded-lg text-xs font-semibold text-gray-700 flex flex-col items-center gap-1" data-demo-role="administrador">
+                        <i class="material-icons text-red-600 text-lg">shield</i>
+                        Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pie text-center py-4 border-t border-gray-100 text-xs text-gray-400 bg-white">Universidad Católica de Honduras ® 2026</div>
+    </div>
+
+
+    <!-- ==================== PANTALLA TEMPORAL: ACCESO EXITOSO ==================== -->
+    <div id="success-screen" class="page-container flex-grow">
+        <!-- Top Bar -->
+        <div class="top-bar flex justify-between items-center bg-[#002080] px-6 py-3 shadow-md h-16">
+            <a href="#" class="flex items-center gap-3">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-10 w-auto">
+            </a>
+            <div class="flex items-center gap-2">
+                <button id="btn-success-back-portal" class="flex items-center gap-1 text-white hover:text-[#DAA520] transition-colors font-medium text-sm border border-white/20 hover:border-[#DAA520]/50 rounded-lg px-3 py-1.5 bg-white/5">
+                    <i class="material-icons text-sm">apps</i>
+                    Volver al Portal
+                </button>
+                <button id="btn-success-logout" class="flex items-center gap-1 text-white hover:text-red-400 transition-colors font-medium text-sm border border-white/20 hover:border-red-400/50 rounded-lg px-3 py-1.5 bg-white/5">
+                    <i class="material-icons text-sm">logout</i>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+
+        <!-- Contenedor del Mensaje -->
+        <div class="max-w-[600px] mx-auto my-16 px-4">
+            <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-8 text-center">
+                <div class="inline-flex p-4 bg-green-50 rounded-full text-green-500 mb-4 animate-bounce">
+                    <i class="material-icons text-4xl">check_circle</i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">¡Ingreso Exitoso!</h2>
+                <p class="text-gray-500 mb-6">Has iniciado sesión correctamente en el sistema de prácticas.</p>
+                
+                <!-- Ficha del usuario mock -->
+                <div class="bg-[#fbf9f8] border border-gray-100 rounded-lg p-5 mb-8 text-left max-w-sm mx-auto">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-[#002080]/10 rounded-full flex items-center justify-center text-[#002080]">
+                            <i id="success-user-avatar" class="material-icons text-2xl">school</i>
+                        </div>
+                        <div>
+                            <div id="success-user-name" class="font-bold text-gray-800">Lic. María Castro</div>
+                            <div id="success-user-role" class="text-xs font-semibold text-[#DAA520] tracking-wider uppercase">Administrador</div>
+                            <div id="success-user-id" class="text-xs text-gray-400">admin.castro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== PANTALLAS DEL ESTUDIANTE ==================== -->
+
+    <!-- 1. EXPLORAR VACANTES -->
+    <div id="student-explore-screen" class="page-container flex-grow min-h-screen bg-[#F5F7FA]">
+        <!-- Top Bar del Estudiante -->
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 h-[64px] bg-white border-b border-outline-variant/50 shadow-sm">
+            <div class="flex items-center gap-3">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-9 w-auto">
+                <div class="w-px h-6 bg-gray-200 hidden md:block"></div>
+                <span class="font-headline-h3 text-headline-h3 font-bold text-primary">Prácticas Profesionales</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6">
+                <a class="font-body-main text-body-main text-primary font-bold border-b-2 border-primary px-3 py-2" href="#">Explorar</a>
+                <a class="btn-go-to-postulaciones font-body-main text-body-main text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Mis Postulaciones</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 mr-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">SF</div>
+                    <span class="text-sm font-semibold text-gray-700 hidden md:inline">Sasha Flores</span>
+                </div>
+                <button class="btn-back-portal-menu text-gray-500 hover:text-primary transition-colors flex items-center p-1.5 rounded-lg border border-outline-variant hover:bg-gray-50 animate-pulse" title="Volver al Portal de Aplicaciones">
+                    <span class="material-symbols-outlined">apps</span>
+                </button>
+                <button class="btn-student-logout-action text-red-500 hover:text-red-700 transition-colors flex items-center p-1.5 rounded-lg border border-red-100 bg-red-50 hover:bg-red-100/50" title="Cerrar Sesión">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main de Explorar -->
+        <main class="pt-[96px] pb-12 px-6 md:px-12 max-w-[1440px] mx-auto">
+            <!-- Search Section -->
+            <section class="mb-8">
+                <div class="bg-white p-6 rounded-xl card-shadow border border-outline-variant/30 flex flex-col md:flex-row items-end gap-4">
+                    <div class="w-full md:flex-1">
+                        <label class="font-body-small text-body-small font-bold mb-1.5 block text-gray-700">Carrera</label>
+                        <div class="relative">
+                            <select id="filter-carrera" class="w-full h-[48px] border border-[#D1D5DB] rounded-lg px-4 appearance-none bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium">
+                                <option value="">Todas las carreras</option>
+                                <option value="Ingeniería en Ciencias de la Computación">Ingeniería en Ciencias de la Computación</option>
+                                <option value="Ingeniería Civil">Ingeniería Civil</option>
+                                <option value="Derecho">Derecho</option>
+                                <option value="Marketing">Marketing / Comunicaciones</option>
+                                <option value="Administración de Empresas">Administración de Empresas</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-outline">expand_more</span>
+                        </div>
+                    </div>
+                    <div class="w-full md:flex-1">
+                        <label class="font-body-small text-body-small font-bold mb-1.5 block text-gray-700">Departamento</label>
+                        <div class="relative">
+                            <select id="filter-departamento" class="w-full h-[48px] border border-[#D1D5DB] rounded-lg px-4 appearance-none bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm font-medium">
+                                <option value="">Todo el país</option>
+                                <option value="Francisco Morazán">Francisco Morazán</option>
+                                <option value="Choluteca">Choluteca</option>
+                                <option value="Cortés">Cortés</option>
+                                <option value="El Paraíso">El Paraíso</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-outline">location_on</span>
+                        </div>
+                    </div>
+
+                    <button id="btn-search-vacancies" class="w-full md:w-auto h-[48px] bg-[#002080] hover:bg-[#001A5E] text-white px-8 rounded-lg font-bold flex items-center justify-center gap-2 btn-transition shadow-sm">
+                        <span class="material-symbols-outlined">search</span>
+                        Buscar
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results Header -->
+            <header class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="font-headline-h2 text-headline-h2 text-primary font-bold">Vacantes Disponibles</h2>
+                    <p class="font-body-small text-body-small text-on-surface-variant">Mostrando <span id="showing-count" class="font-bold">0</span> vacantes</p>
+                </div>
+                <div class="flex items-center gap-md">
+                    <span class="font-body-small text-body-small text-gray-500">Página 1 de 1</span>
+                </div>
+            </header>
+
+            <!-- Vacancy List -->
+            <div id="vacancies-list-container" class="flex flex-col gap-4">
+                <!-- Tarjetas inyectadas dinámicamente -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="vacancies-empty-state" class="hidden flex-col items-center justify-center py-12 text-center bg-white rounded-xl border border-dashed border-gray-300 p-8">
+                <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">search_off</span>
+                <h3 class="text-xl font-bold text-primary mb-1">No se encontraron resultados</h3>
+                <p class="text-gray-500 max-w-md text-sm">Prueba ajustando los filtros o seleccionando otra carrera o departamento.</p>
+                <button id="btn-clear-filters" class="mt-4 text-[#002080] font-bold hover:underline text-sm">Limpiar todos los filtros</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 2. DETALLE DE VACANTE -->
+    <div id="student-detail-screen" class="page-container flex-grow min-h-screen bg-[#F5F7FA]">
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 h-[64px] bg-white border-b border-outline-variant/50 shadow-sm">
+            <div class="flex items-center gap-3">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-9 w-auto">
+                <div class="w-px h-6 bg-gray-200 hidden md:block"></div>
+                <span class="font-headline-h3 text-headline-h3 font-bold text-primary">Prácticas Profesionales</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6">
+                <a class="btn-go-to-explore font-body-main text-body-main text-primary font-bold border-b-2 border-primary px-3 py-2" href="#">Explorar</a>
+                <a class="btn-go-to-postulaciones font-body-main text-body-main text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Mis Postulaciones</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 mr-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">SF</div>
+                    <span class="text-sm font-semibold text-gray-700 hidden md:inline">Sasha Flores</span>
+                </div>
+                <button class="btn-back-portal-menu text-gray-500 hover:text-primary transition-colors flex items-center p-1.5 rounded-lg border border-outline-variant hover:bg-gray-50" title="Volver al Portal de Aplicaciones">
+                    <span class="material-symbols-outlined">apps</span>
+                </button>
+                <button class="btn-student-logout-action text-red-500 hover:text-red-700 transition-colors flex items-center p-1.5 rounded-lg border border-red-100 bg-red-50 hover:bg-red-100/50" title="Cerrar Sesión">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="pt-[96px] pb-12 px-4 md:px-6">
+            <div class="max-w-[900px] mx-auto">
+                <nav class="mb-4">
+                    <button id="btn-back-to-explore" class="flex items-center gap-1 text-[#002080] font-bold hover:underline transition-all group text-sm">
+                        <span class="material-symbols-outlined text-[20px] transition-transform group-hover:-translate-x-1">arrow_back</span>
+                        Volver a resultados
+                    </button>
+                </nav>
+                <div id="vacancy-detail-card" class="bg-white editorial-container rounded-xl overflow-hidden border border-outline-variant/30 card-shadow">
+                    <!-- Rellenado por JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 3. HISTORIAL DE POSTULACIONES -->
+    <div id="student-postulaciones-screen" class="page-container flex-grow min-h-screen bg-[#F5F7FA]">
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 h-[64px] bg-white border-b border-outline-variant/50 shadow-sm">
+            <div class="flex items-center gap-3">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-9 w-auto">
+                <div class="w-px h-6 bg-gray-200 hidden md:block"></div>
+                <span class="font-headline-h3 text-headline-h3 font-bold text-primary">Prácticas Profesionales</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6">
+                <a class="btn-go-to-explore font-body-main text-body-main text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Explorar</a>
+                <a class="font-body-main text-body-main text-primary font-bold border-b-2 border-primary px-3 py-2" href="#">Mis Postulaciones</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 mr-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">SF</div>
+                    <span class="text-sm font-semibold text-gray-700 hidden md:inline">Sasha Flores</span>
+                </div>
+                <button class="btn-back-portal-menu text-gray-500 hover:text-primary transition-colors flex items-center p-1.5 rounded-lg border border-outline-variant hover:bg-gray-50" title="Volver al Portal de Aplicaciones">
+                    <span class="material-symbols-outlined">apps</span>
+                </button>
+                <button class="btn-student-logout-action text-red-500 hover:text-red-700 transition-colors flex items-center p-1.5 rounded-lg border border-red-100 bg-red-50 hover:bg-red-100/50" title="Cerrar Sesión">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="pt-[96px] pb-12 px-6 md:px-12 max-w-[1000px] mx-auto">
+            <div class="mb-8">
+                <h2 class="font-headline-h2 text-headline-h2 text-primary font-bold">Mis Postulaciones</h2>
+                <p class="font-body-small text-body-small text-on-surface-variant mt-1">Historial de vacantes a las que te has postulado y el estado actual de tu proceso.</p>
+            </div>
+
+            <div id="postulaciones-list-container" class="flex flex-col gap-4">
+                <!-- Rellenado por JS -->
+            </div>
+
+            <div id="postulaciones-empty-state" class="hidden flex-col items-center justify-center py-12 text-center bg-white rounded-xl shadow-sm border border-outline-variant/30 p-8">
+                <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">folder_open</span>
+                <h3 class="text-xl font-bold text-primary mb-1">Aún no tienes postulaciones</h3>
+                <p class="text-gray-500 max-w-sm text-sm mt-1 mb-6">Explora las ofertas disponibles y postúlate para comenzar tu proceso de práctica profesional.</p>
+                <button id="btn-empty-go-explore" class="bg-[#002080] hover:bg-[#001A5E] text-white px-6 h-[44px] rounded-lg font-bold btn-transition text-sm">
+                    Explorar Vacantes
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 4. MODAL DE POSTULACIÓN -->
+    <div id="student-postular-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 modal-blur p-4">
+        <div class="bg-white w-full max-w-[540px] rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col border border-outline-variant animate-in fade-in zoom-in duration-300">
+            <div class="px-6 pt-6 pb-4 flex justify-between items-start border-b border-gray-100">
+                <div>
+                    <h2 class="text-xl font-bold text-primary leading-tight">Enviar candidatura</h2>
+                    <p id="modal-vacancy-company" class="text-xs text-gray-500 mt-1">Postulación para Analista de Ciberseguridad Junior en CMI</p>
+                </div>
+                <button id="btn-close-modal" aria-label="Cerrar modal" class="text-gray-400 hover:bg-gray-100 hover:text-gray-600 p-1.5 rounded-full transition-colors flex items-center justify-center">
+                    <span class="material-symbols-outlined text-xl">close</span>
+                </button>
+            </div>
+            <div class="px-6 py-4 flex flex-col gap-4 mt-2">
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm font-bold text-gray-700">Curriculum Vitae (CV) *</label>
+                    <div id="drop-zone-cv" class="border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:border-[#002080] hover:bg-blue-50/10 transition-all cursor-pointer group text-center gap-3">
+                        <span id="upload-icon" class="material-symbols-outlined text-[#002080] text-[44px] transition-transform group-hover:scale-110">cloud_upload</span>
+                        <div id="upload-text" class="flex flex-col">
+                            <span class="text-sm font-bold text-gray-800">Arrastra tu archivo PDF aquí o haz clic para buscar</span>
+                            <span class="text-xs text-gray-400 mt-0.5">Formato admitido: PDF (Máx. 5MB)</span>
+                        </div>
+                        <div id="upload-progress-container" class="w-full hidden mt-2">
+                            <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                <div id="upload-progress-bar" class="bg-[#002080] h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                            <span id="upload-progress-text" class="text-[10px] text-gray-500 font-semibold mt-1 block">Subiendo archivo... 0%</span>
+                        </div>
+                        <div id="btn-select-file" class="bg-[#002080] text-white px-4 py-2 rounded-lg font-bold text-xs hover:bg-[#001A5E] transition-colors mt-2">
+                            Seleccionar archivo
+                        </div>
+                        <input type="file" id="file-input-cv" accept=".pdf" class="hidden" />
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 flex flex-row justify-end gap-3 border-t mt-4">
+                <button id="btn-cancel-modal" class="px-4 py-2 font-semibold text-gray-500 hover:bg-gray-100 rounded-lg transition-colors text-xs">Cancelar</button>
+                <button id="btn-enviar-postulacion" disabled class="px-6 py-2 font-bold bg-[#002080] hover:bg-[#001A5E] text-white rounded-lg shadow-sm disabled:opacity-50 disabled:pointer-events-none transition-all text-xs flex items-center justify-center">
+                    <span>Enviar Postulación</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== PANTALLAS DEL SOCIO/EMPRESA ==================== -->
+
+    <!-- 1. MIS VACANTES (DASHBOARD EMPRESA) -->
+    <div id="company-vacancies-screen" class="page-container flex-grow min-h-screen bg-[#fbf9f8]">
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 h-14 bg-white border-b border-outline-variant shadow-sm">
+            <div class="flex items-center gap-md">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-8 w-auto">
+                <div class="w-px h-6 bg-outline-variant hidden md:block"></div>
+                <span class="text-body-main font-body-main text-on-surface-variant hidden md:block">Portal de Prácticas Profesionales</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold text-sm">TN</div>
+                    <span id="company-profile-name" class="text-body-main font-bold text-primary">TechNova Solutions</span>
+                </div>
+                <button class="btn-company-logout-action flex items-center gap-1 px-3 py-1.5 rounded-lg text-primary font-bold hover:bg-gray-100 transition-all text-xs">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="pt-[80px] pb-12 px-6 md:px-12 max-w-[1280px] mx-auto mt-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-8">
+                <div class="space-y-1">
+                    <h1 class="text-2xl md:text-3xl font-bold text-primary">Mis vacantes</h1>
+                    <p class="text-sm md:text-base text-on-surface-variant max-w-2xl">
+                        Administra las oportunidades de práctica profesional publicadas por tu empresa.
+                    </p>
+                </div>
+                <button id="btn-company-create-vacancy" class="bg-[#002080] hover:bg-[#001A5E] text-white h-[48px] px-6 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-sm active:scale-95">
+                    <span class="material-symbols-outlined">add</span>
+                    <span>Publicar nueva vacante</span>
+                </button>
+            </div>
+            <div id="company-vacancies-list" class="grid grid-cols-1 gap-6">
+                <!-- Se renderiza dinámicamente -->
+            </div>
+            <div class="mt-16 py-6 border-t border-outline-variant flex justify-center">
+                <p class="text-xs text-gray-400">© 2026 Universidad Católica de Honduras - Panel de Empresas</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- 2. POSTULACIONES RECIBIDAS -->
+    <div id="company-postulaciones-screen" class="page-container flex-grow min-h-screen bg-[#fbf9f8]">
+        <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 h-14 bg-white border-b border-outline-variant shadow-sm">
+            <div class="flex items-center gap-md">
+                <button id="btn-company-back-vacancies" class="mr-2 text-primary hover:text-primary/70 transition-colors flex items-center" title="Volver a Mis Vacantes">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-8 w-auto">
+                <div class="w-px h-6 bg-outline-variant hidden md:block"></div>
+                <span class="text-body-main font-body-main text-on-surface-variant hidden md:block">Portal de Prácticas Profesionales</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <span class="font-body-main text-body-main text-on-surface-variant hidden md:block font-bold">TechNova Solutions</span>
+                <button class="btn-company-logout-action flex items-center gap-1 px-3 py-1.5 rounded-lg text-primary font-bold hover:bg-gray-100 transition-all text-xs">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="pt-[80px] pb-12 px-6 md:px-12 max-w-[1280px] mx-auto mt-6">
+            <header class="mb-8">
+                <h1 class="text-2xl md:text-3xl font-bold text-primary mb-1">Postulaciones recibidas</h1>
+                <p class="text-sm md:text-base text-on-surface-variant max-w-2xl">
+                    Revisa los estudiantes interesados en tus oportunidades de práctica profesional. Gestiona los perfiles y actualiza el estado de cada solicitud de manera eficiente.
+                </p>
+            </header>
+            
+            <section class="bg-white border border-outline-variant/35 shadow-sm rounded-xl p-6 mb-8 transition-all hover:shadow-md">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 id="comp-summary-title" class="text-lg md:text-xl font-bold text-on-surface mb-1">Analista de Sistemas Junior</h2>
+                        <div class="flex flex-wrap gap-x-6 gap-y-1 text-gray-500 text-xs font-medium">
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">school</span>
+                                <span id="comp-summary-careers">Carreras: Ingeniería en Ciencias de la Computación</span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                <span id="comp-summary-date">Publicado: 12 de julio, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 text-[#002080] px-6 py-3 rounded-lg flex flex-col items-center border border-blue-100">
+                        <span id="comp-summary-count" class="text-2xl font-bold leading-none">0</span>
+                        <span class="text-[10px] font-bold uppercase tracking-wider mt-1">Postulantes</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white border border-outline-variant/35 rounded-xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-gray-50 border-b border-gray-200 h-[52px]">
+                            <tr>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Estudiante</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Fecha de postulación</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Documentos</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-center">Estado</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="company-postulantes-tbody" class="divide-y divide-gray-100">
+                            <!-- Inyectado dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="comp-table-footer" class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center text-xs text-gray-500">
+                    <span id="comp-table-footer-text">Mostrando 0 de 0 postulantes</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 3. MODAL: PUBLICAR NUEVA VACANTE -->
+    <div id="company-create-vacancy-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 modal-blur p-4">
+        <div class="bg-white w-full max-w-[600px] rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col border border-outline-variant animate-in fade-in zoom-in duration-300">
+            <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
+                <div>
+                    <h2 class="text-xl font-bold text-primary">Publicar nueva vacante</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Completa la información para ofertar una plaza de práctica profesional.</p>
+                </div>
+                <button id="btn-comp-close-modal" class="text-gray-400 hover:bg-gray-100 p-1.5 rounded-full flex items-center justify-center transition-colors">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            </div>
+            <form id="form-company-create-vacancy" class="px-6 py-4 flex flex-col gap-4 overflow-y-auto max-h-[460px]">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Nombre del Puesto / Cargo *</label>
+                        <input id="comp-vacancy-title" type="text" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Ej. Pasante de Desarrollo" required>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Departamento *</label>
+                        <select id="comp-vacancy-dept" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
+                            <option value="Francisco Morazán">Francisco Morazán</option>
+                            <option value="Cortés">Cortés</option>
+                            <option value="Choluteca">Choluteca</option>
+                            <option value="El Paraíso">El Paraíso</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-gray-700 block mb-2">Dirigido a las carreras de (Selección Múltiple) *</label>
+                    <div class="grid grid-cols-2 gap-2 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                        <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+                            <input type="checkbox" name="comp-careers" value="Ingeniería en Ciencias de la Computación" class="rounded text-[#002080] focus:ring-primary">
+                            <span>Ingeniería en Ciencias de la Computación</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+                            <input type="checkbox" name="comp-careers" value="Ingeniería Civil" class="rounded text-[#002080] focus:ring-primary">
+                            <span>Ingeniería Civil</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+                            <input type="checkbox" name="comp-careers" value="Derecho" class="rounded text-[#002080] focus:ring-primary">
+                            <span>Derecho</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+                            <input type="checkbox" name="comp-careers" value="Marketing" class="rounded text-[#002080] focus:ring-primary">
+                            <span>Marketing / Comunicaciones</span>
+                        </label>
+                        <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+                            <input type="checkbox" name="comp-careers" value="Administración de Empresas" class="rounded text-[#002080] focus:ring-primary">
+                            <span>Administración de Empresas</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Fecha Límite de Aplicación *</label>
+                        <input id="comp-vacancy-deadline" type="date" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-gray-700 block mb-1">Descripción de la práctica *</label>
+                    <textarea id="comp-vacancy-desc" rows="3" class="w-full border border-gray-300 rounded-lg text-sm p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Describe brevemente las tareas o funciones del pasante..." required></textarea>
+                </div>
+
+                <div>
+                    <label class="text-xs font-bold text-gray-700 block mb-1">Requisitos (Escribe uno por línea) *</label>
+                    <textarea id="comp-vacancy-req" rows="3" class="w-full border border-gray-300 rounded-lg text-sm p-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Ej. Estudiante de último año&#10;Inglés intermedio&#10;Disponibilidad de 6 horas diarias" required></textarea>
+                </div>
+            </form>
+            <div class="p-6 flex flex-row justify-end gap-3 border-t">
+                <button id="btn-comp-cancel-modal" class="px-4 py-2 font-semibold text-gray-500 hover:bg-gray-100 rounded-lg transition-colors text-xs">Cancelar</button>
+                <button id="btn-comp-save-vacancy" class="px-6 py-2 font-bold bg-[#002080] hover:bg-[#001A5E] text-white rounded-lg shadow-sm transition-all text-xs">
+                    Publicar Vacante
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== PANTALLAS DEL ADMINISTRADOR ==================== -->
+
+    <!-- 1. MODERACIÓN DE VACANTES (PENDIENTES) -->
+    <div id="admin-vacancies-screen" class="page-container flex-grow min-h-screen bg-[#fbf9f8]">
+        <!-- TopNavBar Admin -->
+        <header class="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm flex justify-between items-center w-full h-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+            <div class="flex items-center gap-8">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-9 w-auto">
+                <div class="w-px h-6 bg-gray-200 hidden md:block"></div>
+                <nav class="hidden md:flex gap-6 items-center h-full">
+                    <a class="font-body-main text-body-main text-[#002080] font-bold border-b-2 border-[#002080] pb-1 h-16 flex items-center mt-1" href="#" id="admin-nav-vacancies">Vacantes</a>
+                    <a class="font-body-main text-body-main text-on-surface-variant hover:text-[#002080] transition-colors h-16 flex items-center" href="#" id="admin-nav-companies">Empresas</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 mr-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">AD</div>
+                    <span class="text-sm font-semibold text-gray-700 hidden md:inline">Admin UNICAH</span>
+                </div>
+                <button class="btn-admin-back-portal text-gray-500 hover:text-primary transition-colors flex items-center p-1.5 rounded-lg border border-outline-variant hover:bg-gray-50" title="Volver al Portal de Aplicaciones">
+                    <span class="material-symbols-outlined">apps</span>
+                </button>
+                <button class="btn-admin-logout-action text-red-500 hover:text-red-700 transition-colors flex items-center p-1.5 rounded-lg border border-red-100 bg-red-50 hover:bg-red-100/50" title="Cerrar Sesión">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="max-w-[1280px] mx-auto px-6 md:px-12 py-8 mt-4">
+            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-primary">Moderación de vacantes</h2>
+                    <p class="text-sm md:text-base text-on-surface-variant mt-1">Revisa y aprueba las solicitudes de prácticas profesionales enviadas por las empresas aliadas.</p>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-4 py-1.5 bg-amber-50 text-amber-700 font-bold text-xs rounded-full flex items-center gap-1.5 border border-amber-200">
+                        <span class="material-symbols-outlined text-[16px]">pending_actions</span>
+                        <span id="admin-pending-count">0</span> PENDIENTES
+                    </span>
+                </div>
+            </div>
+
+            <!-- Filter & Search Bar -->
+            <div class="bg-white p-4 rounded-xl card-shadow border border-gray-150 mb-6 flex flex-col md:flex-row items-center gap-4">
+                <div class="relative flex-grow w-full">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                    <input id="admin-search-vacancies" class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-sm font-medium" placeholder="Buscar por cargo..." type="text"/>
+                </div>
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <select id="admin-filter-dept" class="flex-grow md:w-48 px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-sm font-semibold">
+                        <option value="">Todos los departamentos</option>
+                        <option value="Francisco Morazán">Francisco Morazán</option>
+                        <option value="Cortés">Cortés</option>
+                        <option value="Choluteca">Choluteca</option>
+                        <option value="El Paraíso">El Paraíso</option>
+                        <option value="Comayagua">Comayagua</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Vacancy Moderation Table -->
+            <div class="bg-white rounded-xl card-shadow overflow-hidden border border-gray-200">
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-200 h-[52px]">
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Cargo</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Empresa</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Carreras afines</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Departamento</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Fecha</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-right">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-vacancies-tbody" class="divide-y divide-gray-150">
+                            <!-- Inyectado dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-500">
+                    <span id="admin-table-footer-text">Mostrando 0 de 0 vacantes pendientes</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 2. GESTIÓN DE EMPRESAS (CONVENIOS) -->
+    <div id="admin-companies-screen" class="page-container flex-grow min-h-screen bg-[#fbf9f8]">
+        <!-- TopNavBar Admin -->
+        <header class="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm flex justify-between items-center w-full h-16 px-6 md:px-12 max-w-[1440px] mx-auto">
+            <div class="flex items-center gap-8">
+                <img src="logoUnicah.png" alt="Logo UNICAH" class="h-9 w-auto">
+                <div class="w-px h-6 bg-gray-200 hidden md:block"></div>
+                <nav class="hidden md:flex gap-6 items-center h-full">
+                    <a class="font-body-main text-body-main text-on-surface-variant hover:text-[#002080] transition-colors h-16 flex items-center" href="#" id="admin-nav-vacancies-2">Vacantes</a>
+                    <a class="font-body-main text-body-main text-[#002080] font-bold border-b-2 border-[#002080] pb-1 h-16 flex items-center mt-1" href="#" id="admin-nav-companies-2">Empresas</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 mr-2">
+                    <div class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm">AD</div>
+                    <span class="text-sm font-semibold text-gray-700 hidden md:inline">Admin UNICAH</span>
+                </div>
+                <button class="btn-admin-back-portal text-gray-500 hover:text-primary transition-colors flex items-center p-1.5 rounded-lg border border-outline-variant hover:bg-gray-50" title="Volver al Portal de Aplicaciones">
+                    <span class="material-symbols-outlined">apps</span>
+                </button>
+                <button class="btn-admin-logout-action text-red-500 hover:text-red-700 transition-colors flex items-center p-1.5 rounded-lg border border-red-100 bg-red-50 hover:bg-red-100/50" title="Cerrar Sesión">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="max-w-[1280px] mx-auto px-6 md:px-12 py-8 mt-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-[#002080]">Empresas registradas</h1>
+                    <p class="text-sm md:text-base text-on-surface-variant mt-1">Gestión de convenios y verificación de empresas colaboradoras.</p>
+                </div>
+                <button id="btn-admin-create-company" class="flex items-center justify-center gap-2 bg-[#002080] hover:bg-[#001A5E] text-white h-11 px-6 rounded-lg font-bold transition-all shadow-sm active:scale-95">
+                    <span class="material-symbols-outlined text-lg">add_business</span>
+                    <span class="text-xs">Registrar Nueva Empresa</span>
+                </button>
+            </div>
+
+            <!-- Filters & Search Canvas -->
+            <div class="bg-white rounded-xl card-shadow p-6 mb-6 border border-gray-200">
+                <div class="flex flex-col lg:flex-row gap-4 items-center">
+                    <div class="relative w-full lg:flex-grow">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                        <input id="admin-search-companies" class="w-full h-11 pl-12 pr-4 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm font-semibold" placeholder="Buscar por nombre..." type="text"/>
+                    </div>
+                    <!-- Status Filter Tabs -->
+                    <div class="flex gap-2 w-full lg:w-auto overflow-x-auto pb-1 lg:pb-0 font-bold" id="company-status-filters">
+                        <div class="filter-tab active flex items-center gap-1 bg-gray-50 border border-gray-300 px-4 py-2 rounded-full cursor-pointer hover:border-[#002080] transition-colors text-xs text-gray-700" data-status="Todos">
+                            <span>Todos</span>
+                        </div>
+                        <div class="filter-tab flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full cursor-pointer hover:bg-emerald-100/50 transition-colors text-xs text-emerald-800" data-status="Activa">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span>Activa</span>
+                        </div>
+                        <div class="filter-tab flex items-center gap-1.5 bg-amber-50 border border-amber-200 px-4 py-2 rounded-full cursor-pointer hover:bg-amber-100/50 transition-colors text-xs text-amber-800" data-status="Pendiente">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            <span>Pendiente</span>
+                        </div>
+                        <div class="filter-tab flex items-center gap-1.5 bg-red-50 border border-red-200 px-4 py-2 rounded-full cursor-pointer hover:bg-red-100/50 transition-colors text-xs text-red-800" data-status="Inactiva">
+                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                            <span>Inactiva</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Companies Table Content -->
+            <div class="bg-white rounded-xl card-shadow overflow-hidden border border-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50 border-b border-gray-200 h-[52px]">
+                            <tr>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Empresa / ID</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Representante</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider">Fecha de Convenio</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-center">Estado</th>
+                                <th class="px-6 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-right">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-companies-tbody" class="divide-y divide-gray-150 text-sm">
+                            <!-- Inyectado dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 3. MODAL: REGISTRAR NUEVA EMPRESA -->
+    <div id="admin-create-company-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 modal-blur p-4">
+        <div class="bg-white w-full max-w-[540px] rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col border border-gray-200 animate-in fade-in zoom-in duration-300">
+            <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
+                <div>
+                    <h2 class="text-lg font-bold text-[#002080]">Registrar Nueva Empresa</h2>
+                    <p class="text-xs text-gray-500 mt-0.5">Añade una organización para habilitarla en la plataforma.</p>
+                </div>
+                <button id="btn-admin-close-modal" class="text-gray-400 hover:bg-gray-100 p-1.5 rounded-full flex items-center justify-center transition-colors">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            </div>
+            <form id="form-admin-create-company" class="px-6 py-4 flex flex-col gap-4">
+                <div>
+                    <label class="text-xs font-bold text-gray-700 block mb-1">Nombre de la Empresa *</label>
+                    <input id="admin-comp-name" type="text" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Ej. TechNova Solutions S.A." required>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Sector / Rubro *</label>
+                        <select id="admin-comp-sector" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <option value="Tecnología">Tecnología de Información</option>
+                            <option value="Banca y Finanzas">Banca y Finanzas</option>
+                            <option value="Servicios Legales">Servicios Legales</option>
+                            <option value="Comercio y Retail">Comercio y Retail</option>
+                            <option value="Servicios Generales">Servicios Generales</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Representante *</label>
+                        <input id="admin-comp-rep" type="text" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Nombre completo" required>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Fecha del Convenio *</label>
+                        <input id="admin-comp-date" type="date" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-gray-700 block mb-1">Estado de Convenio *</label>
+                        <select id="admin-comp-status" class="w-full h-10 border border-gray-300 rounded-lg text-sm px-3 focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <option value="Activa">Activa (Vigente)</option>
+                            <option value="Pendiente">Pendiente (En revisión)</option>
+                            <option value="Inactiva">Inactiva (Vencida)</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div class="p-6 flex flex-row justify-end gap-3 border-t">
+                <button id="btn-admin-cancel-modal" class="px-4 py-2 font-semibold text-gray-500 hover:bg-gray-100 rounded-lg transition-colors text-xs">Cancelar</button>
+                <button id="btn-admin-save-company" class="px-6 py-2 font-bold bg-[#002080] hover:bg-[#001A5E] text-white rounded-lg shadow-sm transition-all text-xs">
+                    Registrar Empresa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MODAL: REVISAR SOLICITUD DE VACANTE -->
+    <div id="admin-review-vacancy-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 modal-blur p-4">
+        <div class="bg-white w-full max-w-[620px] rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col border border-gray-200 animate-in fade-in zoom-in duration-300">
+            <div class="px-6 pt-6 pb-4 flex justify-between items-center border-b border-gray-100">
+                <div>
+                    <h2 class="text-lg font-bold text-primary">Revisar Solicitud de Vacante</h2>
+                    <p id="admin-review-subtitle" class="text-xs text-gray-500 mt-0.5">Detalles de la oferta enviada para aprobación.</p>
+                </div>
+                <button id="btn-admin-close-review" class="text-gray-400 hover:bg-gray-100 p-1.5 rounded-full flex items-center justify-center transition-colors">
+                    <span class="material-symbols-outlined text-lg">close</span>
+                </button>
+            </div>
+            
+            <div class="px-6 py-4 flex flex-col gap-4 overflow-y-auto max-h-[420px] text-sm">
+                <!-- Info Header -->
+                <div class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div class="w-12 h-12 bg-white rounded-lg border border-gray-150 flex items-center justify-center text-[#002080] shrink-0 shadow-xs">
+                        <span id="admin-review-logo" class="material-symbols-outlined text-2xl">business</span>
+                    </div>
+                    <div>
+                        <h3 id="admin-review-title" class="font-bold text-[#002080] text-base">Desarrollador Web Junior</h3>
+                        <p id="admin-review-company" class="text-xs text-gray-600 font-bold">Tech Solutions S.A.</p>
+                    </div>
+                </div>
+
+                <!-- Specs -->
+                <div class="grid grid-cols-2 gap-4 text-xs font-semibold text-gray-600">
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-gray-400">location_on</span>
+                        <span id="admin-review-dept">Tegucigalpa</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-gray-400">school</span>
+                        <span id="admin-review-careers">Ingeniería en Ciencias de la Computación</span>
+                    </div>
+                </div>
+
+                <hr class="border-gray-100">
+
+                <div>
+                    <h4 class="font-bold text-[#002080] mb-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">description</span> Descripción
+                    </h4>
+                    <p id="admin-review-desc" class="text-gray-600 leading-relaxed text-xs">Descripción detallada.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-[#002080] mb-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">fact_check</span> Requisitos
+                    </h4>
+                    <ul id="admin-review-req-list" class="space-y-1.5 text-xs text-gray-600 list-disc pl-4">
+                        <!-- Items -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="p-6 bg-gray-50 flex flex-row justify-between items-center border-t">
+                <button id="btn-admin-reject" class="px-6 py-2 font-bold bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-lg text-xs transition-colors">
+                    Rechazar
+                </button>
+                <div class="flex gap-2">
+                    <button id="btn-admin-cancel-review" class="px-4 py-2 font-semibold text-gray-500 hover:bg-gray-150 rounded-lg text-xs transition-colors">Cerrar</button>
+                    <button id="btn-admin-approve" class="px-6 py-2 font-bold bg-[#002080] hover:bg-[#001A5E] text-white rounded-lg shadow-sm text-xs transition-colors">
+                        Aprobar Vacante
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POPOVER ABSOLUTO PARA SELECCIÓN DE ESTADO DE CONVENIO DE EMPRESA (ADMIN) -->
+    <div class="fixed hidden bg-white border border-gray-200 shadow-xl rounded-lg p-1.5 w-48 z-[120]" id="admin-company-status-popover">
+        <ul class="text-xs space-y-0.5">
+            <li class="p-2 hover:bg-emerald-50/50 hover:text-emerald-800 cursor-pointer rounded font-bold text-emerald-700 border-l-2 border-transparent hover:border-emerald-600 bg-emerald-50/20" data-status="Activa">Marcar como Activa</li>
+            <li class="p-2 hover:bg-amber-50/50 hover:text-amber-800 cursor-pointer rounded font-bold text-amber-700 border-l-2 border-transparent hover:border-amber-600 bg-amber-50/20" data-status="Pendiente">Marcar como Pendiente</li>
+            <li class="p-2 hover:bg-red-50/50 hover:text-red-800 cursor-pointer rounded font-bold text-red-700 border-l-2 border-transparent hover:border-red-600 bg-red-50/20" data-status="Inactiva">Marcar como Inactiva</li>
+        </ul>
+    </div>
+
+
+    <!-- ==================== NOTIFICACIÓN TOAST ==================== -->
+    <div id="toast-notification" class="toast flex items-center gap-3">
+        <i class="material-icons text-emerald-500">check_circle</i>
+        <div class="text-sm font-semibold text-gray-700" id="toast-message">
+            Acceso concedido exitosamente
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-6 text-center text-xs text-gray-400">
+        <p>© 2026 Universidad Católica de Honduras. Todos los derechos reservados.</p>
+        <p class="mt-1">Portal de Aplicaciones Institucionales</p>
+    </footer>
+
+    <!-- Lógica de control de la demo -->
+    <script src="app.js"></script>
+</body>
+</html>
