@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeAdminVacancy = null;
     let activeAdminCompany = null;
     let uploadedFileName = '';
+    let editingVacancyId = null;
 
     // === BASE DE DATOS MOCK DE VACANTES ===
     const vacancies = [
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Pasante de Desarrollo Full-Stack",
             company: "Banco de Occidente, S.A.",
             logoIcon: "business",
-            location: "Francisco Morazán, Tegucigalpa",
+
             department: "Francisco Morazán",
             category: "Ingeniería",
             career: "Ingeniería en Ciencias de la Computación",
@@ -40,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Asistente Legal Junior",
             company: "Bufete Valladares & Asociados",
             logoIcon: "corporate_fare",
-            location: "Choluteca, Choluteca",
             department: "Choluteca",
             category: "Derecho",
             career: "Derecho",
@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Practicante de Mercadeo Digital",
             company: "Supermercados La Colonia",
             logoIcon: "store",
-            location: "Cortés, San Pedro Sula",
             department: "Cortés",
             category: "Marketing",
             career: "Marketing",
@@ -88,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Analista de Sistemas Junior",
             company: "TechNova Solutions",
             logoIcon: "computer",
-            location: "Francisco Morazán, Tegucigalpa (Híbrido)",
             department: "Francisco Morazán",
             category: "Ingeniería",
             career: "Ingeniería en Ciencias de la Computación",
@@ -118,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Asistente Contable y Auditoría",
             company: "TechNova Solutions",
             logoIcon: "account_balance_wallet",
-            location: "Francisco Morazán, Tegucigalpa",
+
             department: "Francisco Morazán",
             category: "Negocios",
             career: "Administración de Empresas",
@@ -142,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Diseñador Gráfico UI/UX",
             company: "TechNova Solutions",
             logoIcon: "brush",
-            location: "Cortés, San Pedro Sula",
+
             department: "Cortés",
             category: "Marketing",
             career: "Marketing",
@@ -166,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Pasante de Recursos Humanos",
             company: "TechNova Solutions",
             logoIcon: "psychology",
-            location: "Francisco Morazán, Tegucigalpa",
+
             department: "Francisco Morazán",
             category: "Negocios",
             career: "Administración de Empresas",
@@ -194,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Desarrollador Web Junior",
             company: "Tech Solutions S.A.",
             logoIcon: "business",
-            location: "Francisco Morazán, Tegucigalpa",
+
             department: "Francisco Morazán",
             category: "Ingeniería",
             career: "Ingeniería en Ciencias de la Computación",
@@ -215,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Asistente de Auditoría",
             company: "Firma Contable & Asociados",
             logoIcon: "account_balance",
-            location: "Cortés, San Pedro Sula",
+
             department: "Cortés",
             category: "Negocios",
             career: "Contaduría Pública",
@@ -236,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Diseñador Gráfico Jr",
             company: "Global Media Corp",
             logoIcon: "palette",
-            location: "Comayagua, Comayagua",
+
             department: "Comayagua",
             category: "Marketing",
             career: "Diseño Gráfico",
@@ -257,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Pasante de Recursos Humanos",
             company: "Industrial del Norte",
             logoIcon: "groups",
-            location: "Choluteca, Choluteca",
+
             department: "Choluteca",
             category: "Negocios",
             career: "Psicología",
@@ -278,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Ingeniero Industrial (Práctica)",
             company: "Manufacturas S.A.",
             logoIcon: "factory",
-            location: "Francisco Morazán, Tegucigalpa",
+
             department: "Francisco Morazán",
             category: "Ingeniería",
             career: "Ingeniería Industrial",
@@ -333,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const form = document.getElementById('formulariologinunicah');
     const demoBtns = document.querySelectorAll('[data-demo-role]');
-    
+
     // Inputs del login
     const usernameInput = document.getElementById('UsrUsr');
     const passwordInput = document.getElementById('UsrPwd');
@@ -341,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Menú de Login top-bar
     const loginMenuBtn = document.getElementById('btn-login-menu');
     const userMenu = document.getElementById('user-menu');
-    
+
     // Éxito de otros roles (Admin)
     const successUserName = document.getElementById('success-user-name');
     const successUserRole = document.getElementById('success-user-role');
@@ -361,14 +359,14 @@ document.addEventListener('DOMContentLoaded', () => {
         filterDepartamento: document.getElementById('filter-departamento'),
         btnSearch: document.getElementById('btn-search-vacancies'),
         btnClearFilters: document.getElementById('btn-clear-filters'),
-        
+
         detailCard: document.getElementById('vacancy-detail-card'),
         btnBackToExplore: document.getElementById('btn-back-to-explore'),
-        
+
         postulacionesList: document.getElementById('postulaciones-list-container'),
         postulacionesEmpty: document.getElementById('postulaciones-empty-state'),
         btnEmptyGoExplore: document.getElementById('btn-empty-go-explore'),
-        
+
         modal: document.getElementById('student-postular-modal'),
         btnCancelModal: document.getElementById('btn-cancel-modal'),
         btnCloseModal: document.getElementById('btn-close-modal'),
@@ -388,22 +386,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const companyElements = {
         vacanciesList: document.getElementById('company-vacancies-list'),
         btnCreateVacancy: document.getElementById('btn-company-create-vacancy'),
-        
+
         btnBackVacancies: document.getElementById('btn-company-back-vacancies'),
         postulantesTbody: document.getElementById('company-postulantes-tbody'),
         tableFooterText: document.getElementById('comp-table-footer-text'),
-        
+
         summaryTitle: document.getElementById('comp-summary-title'),
         summaryCareers: document.getElementById('comp-summary-careers'),
         summaryDate: document.getElementById('comp-summary-date'),
         summaryCount: document.getElementById('comp-summary-count'),
-        
+
         modalCreate: document.getElementById('company-create-vacancy-modal'),
         btnCloseModal: document.getElementById('btn-comp-close-modal'),
         btnCancelModal: document.getElementById('btn-comp-cancel-modal'),
         btnSaveVacancy: document.getElementById('btn-comp-save-vacancy'),
         formCreate: document.getElementById('form-company-create-vacancy'),
-        
+
         popover: document.getElementById('status-popover')
     };
 
@@ -412,32 +410,32 @@ document.addEventListener('DOMContentLoaded', () => {
         vacanciesTbody: document.getElementById('admin-vacancies-tbody'),
         vacanciesPendingCount: document.getElementById('admin-pending-count'),
         tableFooterText: document.getElementById('admin-table-footer-text'),
-        
+
         searchVacancies: document.getElementById('admin-search-vacancies'),
         filterDept: document.getElementById('admin-filter-dept'),
-        
+
         navVacancies: document.getElementById('admin-nav-vacancies'),
         navCompanies: document.getElementById('admin-nav-companies'),
         navVacancies2: document.getElementById('admin-nav-vacancies-2'),
         navCompanies2: document.getElementById('admin-nav-companies-2'),
-        
+
         companiesTbody: document.getElementById('admin-companies-tbody'),
         searchCompanies: document.getElementById('admin-search-companies'),
         btnCreateCompany: document.getElementById('btn-admin-create-company'),
         statusFilters: document.getElementById('company-status-filters'),
-        
+
         modalCreateCompany: document.getElementById('admin-create-company-modal'),
         btnCloseModalCompany: document.getElementById('btn-admin-close-modal'),
         btnCancelModalCompany: document.getElementById('btn-admin-cancel-modal'),
         btnSaveCompany: document.getElementById('btn-admin-save-company'),
         formCreateCompany: document.getElementById('form-admin-create-company'),
-        
+
         modalReviewVacancy: document.getElementById('admin-review-vacancy-modal'),
         btnCloseReview: document.getElementById('btn-admin-close-review'),
         btnCancelReview: document.getElementById('btn-admin-cancel-review'),
         btnApproveVacancy: document.getElementById('btn-admin-approve'),
         btnRejectVacancy: document.getElementById('btn-admin-reject'),
-        
+
         reviewLogo: document.getElementById('admin-review-logo'),
         reviewTitle: document.getElementById('admin-review-title'),
         reviewCompany: document.getElementById('admin-review-company'),
@@ -445,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewCareers: document.getElementById('admin-review-careers'),
         reviewDesc: document.getElementById('admin-review-desc'),
         reviewReqList: document.getElementById('admin-review-req-list'),
-        
+
         popoverCompany: document.getElementById('admin-company-status-popover')
     };
 
@@ -641,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
         activeList.forEach(vac => {
             let deadlineClass = 'text-gray-500 font-semibold';
             let deadlineText = `Cierra el ${vac.rawDeadline.split(',')[0]}`;
-            
+
             if (vac.deadline.includes('día') || vac.deadline.includes('mañana')) {
                 deadlineClass = 'text-[#DC2626] font-bold';
                 deadlineText = `Cierra en ${vac.deadline}`;
@@ -666,7 +664,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="flex flex-wrap gap-x-4 gap-y-1 items-center text-on-surface-variant text-[11px] mt-1">
                                 <div class="flex items-center gap-1">
                                     <span class="material-symbols-outlined text-[13px]">location_on</span>
-                                    <span>${vac.location.split(',')[1] || vac.location}</span>
+                                    <span>${vac.department}</span>
                                 </div>
                                 <div class="flex items-center gap-1">
                                     <span class="material-symbols-outlined text-[13px]">school</span>
@@ -688,7 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="bg-[#002080] hover:bg-[#001A5E] text-white px-4 h-8 rounded font-bold text-xs btn-transition btn-view-detail" data-id="${vac.id}">Ver Detalle</button>
                 </div>
             `;
-            
+
             studentElements.exploreList.appendChild(card);
         });
 
@@ -704,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
     studentElements.btnSearch.addEventListener('click', () => {
         const carrera = studentElements.filterCarrera.value;
         const depto = studentElements.filterDepartamento.value;
-        
+
         let filtered = vacancies;
 
         if (carrera) {
@@ -765,7 +763,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="flex flex-wrap gap-x-6 gap-y-2 text-gray-500 text-xs md:text-sm items-center mb-6">
                         <div class="flex items-center gap-1">
                             <span class="material-symbols-outlined text-lg text-gray-400">location_on</span>
-                            <span>${vac.location}</span>
+                            <span>${vac.department}</span>
                         </div>
                         <div class="flex items-center gap-1">
                             <span class="material-symbols-outlined text-lg text-gray-400">corporate_fare</span>
@@ -852,7 +850,7 @@ document.addEventListener('DOMContentLoaded', () => {
         studentElements.fileInput.value = '';
         uploadedFileName = '';
         studentElements.btnSubmitModal.disabled = true;
-        
+
         studentElements.dropZone.className = "border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:border-[#002080] hover:bg-blue-50/10 transition-all cursor-pointer group text-center gap-3";
         studentElements.uploadIcon.textContent = 'cloud_upload';
         studentElements.uploadIcon.className = "material-symbols-outlined text-[#002080] text-[44px] transition-transform group-hover:scale-110";
@@ -917,7 +915,7 @@ document.addEventListener('DOMContentLoaded', () => {
             progress += 20;
             studentElements.progressBar.style.width = `${progress}%`;
             studentElements.progressText.textContent = `Subiendo archivo... ${progress}%`;
-            
+
             if (progress >= 100) {
                 clearInterval(interval);
                 studentElements.dropZone.className = "border-2 border-solid border-emerald-400 rounded-lg p-8 flex flex-col items-center justify-center bg-emerald-50/10 transition-all cursor-pointer group text-center gap-3";
@@ -1052,7 +1050,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const file = btn.getAttribute('data-file');
                 showToast(`Descargando archivo: ${file}...`);
                 setTimeout(() => {
-                    const blob = new Blob(["Simulated PDF Content"], {type: "application/pdf"});
+                    const blob = new Blob(["Simulated PDF Content"], { type: "application/pdf" });
                     const link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
                     link.download = file;
@@ -1072,11 +1070,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let badgeClass = "bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase";
             if (vac.status === 'Cerrada') {
                 badgeClass = "bg-gray-100 text-gray-500 border border-gray-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase";
+            } else if (vac.status === 'Pendiente') {
+                badgeClass = "bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase";
             }
 
             const card = document.createElement('div');
             card.className = "bg-white p-5 rounded-xl card-shadow border border-outline-variant/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition-all hover:shadow-md";
-            
+
             let btnPostulantes = `
                 <button class="flex-1 md:flex-none h-10 px-6 rounded-lg bg-[#002080] hover:bg-[#001A5E] text-white text-xs font-bold hover:bg-on-primary-fixed-variant transition-colors shadow-sm btn-comp-view-applications" data-id="${vac.id}">
                     Ver postulaciones
@@ -1086,6 +1086,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnPostulantes = `
                     <button class="flex-1 md:flex-none h-10 px-6 rounded-lg bg-gray-100 text-gray-400 text-xs font-bold cursor-not-allowed" disabled>
                         Ver postulaciones
+                    </button>
+                `;
+            }
+
+            let statusBtn = '';
+            if (vac.status === 'Activa' || vac.status === 'Pendiente') {
+                statusBtn = `
+                    <button class="flex-1 md:flex-none h-10 px-4 rounded-lg border border-red-200 text-red-600 bg-red-50 hover:bg-red-100/50 text-xs font-bold btn-comp-toggle-status" data-id="${vac.id}" data-action="close">
+                        Finalizar
+                    </button>
+                `;
+            } else if (vac.status === 'Cerrada') {
+                statusBtn = `
+                    <button class="flex-1 md:flex-none h-10 px-4 rounded-lg border border-green-200 text-green-600 bg-green-50 hover:bg-green-100/50 text-xs font-bold btn-comp-toggle-status" data-id="${vac.id}" data-action="activate">
+                        Reactivar
                     </button>
                 `;
             }
@@ -1106,17 +1121,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="flex items-center gap-1 text-gray-400 text-[11px]">
                             <span class="material-symbols-outlined text-sm">calendar_today</span>
                             <span>Publicado: ${vac.publishedDateStr}</span>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="flex items-center gap-3 w-full md:w-auto mt-4 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-100">
+                <div class="flex items-center gap-2 w-full md:w-auto mt-4 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-100 flex-wrap">
                     <button class="flex-1 md:flex-none h-10 px-4 rounded-lg border border-gray-300 text-[#002080] text-xs font-bold hover:bg-gray-50 transition-colors btn-comp-edit-vacancy" data-id="${vac.id}">
                         Editar
                     </button>
+                    ${statusBtn}
                     ${btnPostulantes}
                 </div>
             `;
-            
+
             companyElements.vacanciesList.appendChild(card);
         });
 
@@ -1127,9 +1142,55 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        document.querySelectorAll('.btn-comp-toggle-status').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = parseInt(btn.getAttribute('data-id'));
+                const action = btn.getAttribute('data-action');
+                const vac = vacancies.find(v => v.id === id);
+                if (vac) {
+                    if (action === 'close') {
+                        vac.status = 'Cerrada';
+                        showToast(`Oferta "${vac.title}" finalizada / desactivada con éxito`);
+                    } else {
+                        vac.status = 'Activa';
+                        showToast(`Oferta "${vac.title}" reactivada con éxito`);
+                    }
+                    renderCompanyVacancies();
+                }
+            });
+        });
+
         document.querySelectorAll('.btn-comp-edit-vacancy').forEach(btn => {
             btn.addEventListener('click', () => {
-                showToast('Edición de vacante no disponible en esta demo', false);
+                const id = parseInt(btn.getAttribute('data-id'));
+                const vac = vacancies.find(v => v.id === id);
+                if (vac) {
+                    editingVacancyId = vac.id;
+
+                    // Llenar formulario
+                    document.getElementById('comp-vacancy-title').value = vac.title;
+                    document.getElementById('comp-vacancy-dept').value = vac.department || "Francisco Morazán";
+                    document.getElementById('comp-vacancy-desc').value = vac.description;
+                    document.getElementById('comp-vacancy-req').value = vac.requirements.join('\n');
+                    document.getElementById('comp-vacancy-deadline').value = "2026-11-30";
+
+                    document.querySelectorAll('input[name="comp-careers"]').forEach(chk => {
+                        chk.checked = vac.careersList.includes(chk.value);
+                    });
+
+                    // Modificar encabezados del modal
+                    const modalTitle = document.querySelector('#company-create-vacancy-modal h2');
+                    const modalSubtitle = document.querySelector('#company-create-vacancy-modal p');
+                    const saveBtn = document.getElementById('btn-comp-save-vacancy');
+
+                    if (modalTitle) modalTitle.textContent = "Editar vacante";
+                    if (modalSubtitle) modalSubtitle.textContent = "Modifica los detalles de esta vacante.";
+                    if (saveBtn) saveBtn.textContent = "Guardar Cambios";
+
+                    // Abrir modal
+                    companyElements.modalCreate.style.display = 'flex';
+                    setTimeout(() => companyElements.modalCreate.classList.remove('hidden'), 50);
+                }
             });
         });
     }
@@ -1224,10 +1285,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 const applicantId = parseInt(btn.getAttribute('data-id'));
                 const applicant = vac.applicants.find(a => a.id === applicantId);
-                
+
                 if (applicant) {
                     activeApplicant = applicant;
-                    
+
                     const rect = btn.getBoundingClientRect();
                     companyElements.popover.style.top = `${rect.bottom + window.scrollY + 6}px`;
                     companyElements.popover.style.left = `${rect.left - 160}px`;
@@ -1241,7 +1302,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
             const status = item.getAttribute('data-status');
-            
+
             if (activeApplicant && activeCompanyVacancy) {
                 activeApplicant.status = status;
                 showToast(`Estado de postulación: ${status}`);
@@ -1257,7 +1318,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CREACIÓN DE VACANTE DE LA EMPRESA (MODERADA POR ADMIN)
     companyElements.btnCreateVacancy.addEventListener('click', () => {
+        editingVacancyId = null;
         companyElements.formCreate.reset();
+
+        // Restablecer títulos e iconos del modal
+        const modalTitle = document.querySelector('#company-create-vacancy-modal h2');
+        const modalSubtitle = document.querySelector('#company-create-vacancy-modal p');
+        const saveBtn = document.getElementById('btn-comp-save-vacancy');
+
+        if (modalTitle) modalTitle.textContent = "Publicar nueva vacante";
+        if (modalSubtitle) modalSubtitle.textContent = "Completa la información para ofertar una plaza de práctica profesional.";
+        if (saveBtn) saveBtn.textContent = "Publicar Vacante";
+
         companyElements.modalCreate.style.display = 'flex';
         setTimeout(() => companyElements.modalCreate.classList.remove('hidden'), 50);
     });
@@ -1289,34 +1361,48 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Crear registro en estado "Pendiente" para que el administrador la modere
-        const newPending = {
-            id: Date.now(),
-            title: title,
-            company: "TechNova Solutions",
-            logoIcon: "business",
-            location: `${dept}, Honduras`,
-            department: dept,
-            category: "Ingeniería",
-            career: checkedCareers[0],
-            careersList: checkedCareers,
-            published: "hace unos momentos",
-            publishedDateStr: new Date().toLocaleDateString('es-HN', { day: 'numeric', month: 'long', year: 'numeric' }),
-            deadline: "30 Nov",
-            rawDeadline: new Date(deadline).toLocaleDateString('es-HN', { day: 'numeric', month: 'short', year: 'numeric' }),
-            description: desc,
-            requirements: req.split('\n').filter(r => r.trim() !== ''),
-            companyOwner: "TechNova Solutions",
-            status: "Pendiente",
-            applicants: []
-        };
+        if (editingVacancyId) {
+            // Modo edición: buscar vacante existente y actualizarla
+            const vac = vacancies.find(v => v.id === editingVacancyId);
+            if (vac) {
+                vac.title = title;
+                vac.department = dept;
+                vac.careersList = checkedCareers;
+                vac.career = checkedCareers[0];
+                vac.description = desc;
+                vac.requirements = req.split('\n').filter(r => r.trim() !== '');
+                vac.rawDeadline = new Date(deadline).toLocaleDateString('es-HN', { day: 'numeric', month: 'short', year: 'numeric' });
 
-        // Agregar a la cola de moderación del administrador
-        pendingVacancies.unshift(newPending);
-        
+                showToast(`¡Vacante "${title}" actualizada con éxito!`);
+            }
+            editingVacancyId = null;
+        } else {
+            // Modo creación: agregar nuevo pendiente para moderación del admin
+            const newPending = {
+                id: Date.now(),
+                title: title,
+                company: "TechNova Solutions",
+                logoIcon: "business",
+                department: dept,
+                category: "Ingeniería",
+                career: checkedCareers[0],
+                careersList: checkedCareers,
+                published: "hace unos momentos",
+                publishedDateStr: new Date().toLocaleDateString('es-HN', { day: 'numeric', month: 'long', year: 'numeric' }),
+                deadline: "30 Nov",
+                rawDeadline: new Date(deadline).toLocaleDateString('es-HN', { day: 'numeric', month: 'short', year: 'numeric' }),
+                description: desc,
+                requirements: req.split('\n').filter(r => r.trim() !== ''),
+                companyOwner: "TechNova Solutions",
+                status: "Pendiente",
+                applicants: []
+            };
+
+            pendingVacancies.unshift(newPending);
+            showToast('¡Vacante enviada a moderación! Esperando aprobación del Administrador.');
+        }
+
         closeCompanyModal();
-        showToast('¡Vacante enviada a moderación! Esperando aprobación del Administrador.');
-        
         renderCompanyVacancies();
     });
 
@@ -1360,7 +1446,6 @@ document.addEventListener('DOMContentLoaded', () => {
             row.innerHTML = `
                 <td class="px-6 py-4">
                     <div class="font-bold text-primary text-sm leading-tight">${vac.title}</div>
-                    <div class="text-[10px] text-gray-400 mt-0.5">ID: #VAC-${vac.id}</div>
                 </td>
                 <td class="px-6 py-4">
                     <div class="flex items-center gap-2">
@@ -1412,7 +1497,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (adminElements.reviewDept) adminElements.reviewDept.textContent = vac.department;
         if (adminElements.reviewCareers) adminElements.reviewCareers.textContent = vac.careersList.join(', ');
         if (adminElements.reviewDesc) adminElements.reviewDesc.textContent = vac.description;
-        
+
         if (adminElements.reviewReqList) {
             adminElements.reviewReqList.innerHTML = '';
             vac.requirements.forEach(r => {
@@ -1480,7 +1565,7 @@ document.addEventListener('DOMContentLoaded', () => {
         adminElements.companiesTbody.innerHTML = '';
 
         const search = adminElements.searchCompanies.value.toLowerCase();
-        
+
         // Obtener el filtro activo de convenios
         const activeFilterTab = adminElements.statusFilters.querySelector('.filter-tab.active');
         const activeFilter = activeFilterTab ? activeFilterTab.getAttribute('data-status') : 'Todos';
@@ -1554,10 +1639,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 const compId = parseInt(btn.getAttribute('data-id'));
                 const comp = companies.find(c => c.id === compId);
-                
+
                 if (comp) {
                     activeAdminCompany = comp;
-                    
+
                     const rect = btn.getBoundingClientRect();
                     adminElements.popoverCompany.style.top = `${rect.bottom + window.scrollY + 6}px`;
                     adminElements.popoverCompany.style.left = `${rect.left - 160}px`;
@@ -1589,7 +1674,7 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const status = item.getAttribute('data-status');
-                
+
                 if (activeAdminCompany) {
                     activeAdminCompany.status = status;
                     showToast(`Convenio de ${activeAdminCompany.name} actualizado a: ${status}`);
@@ -1629,32 +1714,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (adminElements.btnSaveCompany) {
         adminElements.btnSaveCompany.addEventListener('click', (e) => {
-        e.preventDefault();
+            e.preventDefault();
 
-        const name = document.getElementById('admin-comp-name').value.trim();
-        const sector = document.getElementById('admin-comp-sector').value;
-        const rep = document.getElementById('admin-comp-rep').value.trim();
-        const dateVal = document.getElementById('admin-comp-date').value;
-        const status = document.getElementById('admin-comp-status').value;
+            const name = document.getElementById('admin-comp-name').value.trim();
+            const sector = document.getElementById('admin-comp-sector').value;
+            const rep = document.getElementById('admin-comp-rep').value.trim();
+            const dateVal = document.getElementById('admin-comp-date').value;
+            const status = document.getElementById('admin-comp-status').value;
 
-        if (!name || !rep || !dateVal) {
-            showToast('Por favor, complete todos los campos requeridos.', true);
-            return;
-        }
+            if (!name || !rep || !dateVal) {
+                showToast('Por favor, complete todos los campos requeridos.', true);
+                return;
+            }
 
-        const newComp = {
-            id: Date.now(),
-            name: name,
-            sector: sector,
-            rep: rep,
-            date: new Date(dateVal).toLocaleDateString('es-HN', { day: 'numeric', month: 'long', year: 'numeric' }),
-            status: status
-        };
+            const newComp = {
+                id: Date.now(),
+                name: name,
+                sector: sector,
+                rep: rep,
+                date: new Date(dateVal).toLocaleDateString('es-HN', { day: 'numeric', month: 'long', year: 'numeric' }),
+                status: status
+            };
 
-        companies.unshift(newComp);
-        closeCreateCompanyModal();
-        showToast(`¡Empresa ${name} registrada con éxito!`);
-        renderAdminCompanies();
+            companies.unshift(newComp);
+            closeCreateCompanyModal();
+            showToast(`¡Empresa ${name} registrada con éxito!`);
+            renderAdminCompanies();
         });
     }
 
@@ -1664,11 +1749,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const role = btn.getAttribute('data-role') || btn.getAttribute('data-demo-role');
-            
+
             if (mockCredentials[role]) {
                 usernameInput.value = mockCredentials[role].user;
                 passwordInput.value = mockCredentials[role].pass;
-                
+
                 setTimeout(() => {
                     form.dispatchEvent(new Event('submit'));
                 }, 200);
@@ -1728,7 +1813,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (currentRole === 'empresa') {
                     successUserAvatar.parentElement.className = 'w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600';
                     successUserRole.className = 'text-xs font-semibold text-amber-600 tracking-wider uppercase';
-                    
+
                     const compProfileName = document.getElementById('company-profile-name');
                     if (compProfileName) compProfileName.textContent = displayUser;
                 } else {
