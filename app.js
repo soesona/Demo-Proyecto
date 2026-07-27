@@ -1121,7 +1121,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="flex items-center gap-1 text-gray-400 text-[11px]">
                             <span class="material-symbols-outlined text-sm">calendar_today</span>
                             <span>Publicado: ${vac.publishedDateStr}</span>
-
+                        </div>
+                    </div>
                 </div>
                 <div class="flex items-center gap-2 w-full md:w-auto mt-4 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-gray-100 flex-wrap">
                     <button class="flex-1 md:flex-none h-10 px-4 rounded-lg border border-gray-300 text-[#002080] text-xs font-bold hover:bg-gray-50 transition-colors btn-comp-edit-vacancy" data-id="${vac.id}">
