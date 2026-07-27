@@ -1394,8 +1394,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Buscador y filtros de vacantes en el panel de administrador
-    adminElements.searchVacancies.addEventListener('input', renderAdminVacancies);
-    adminElements.filterDept.addEventListener('change', renderAdminVacancies);
+    if (adminElements.searchVacancies) {
+        adminElements.searchVacancies.addEventListener('input', renderAdminVacancies);
+    }
+    if (adminElements.filterDept) {
+        adminElements.filterDept.addEventListener('change', renderAdminVacancies);
+    }
 
     // MODAL DE DETALLE Y REVISIÓN PARA ADMINISTRADOR
     function openAdminReviewModal(id) {
@@ -1403,63 +1407,73 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!vac) return;
         activeAdminVacancy = vac;
 
-        adminElements.reviewTitle.textContent = vac.title;
-        adminElements.reviewCompany.textContent = vac.company;
-        adminElements.reviewDept.textContent = vac.department;
-        adminElements.reviewCareers.textContent = vac.careersList.join(', ');
-        adminElements.reviewDesc.textContent = vac.description;
+        if (adminElements.reviewTitle) adminElements.reviewTitle.textContent = vac.title;
+        if (adminElements.reviewCompany) adminElements.reviewCompany.textContent = vac.company;
+        if (adminElements.reviewDept) adminElements.reviewDept.textContent = vac.department;
+        if (adminElements.reviewCareers) adminElements.reviewCareers.textContent = vac.careersList.join(', ');
+        if (adminElements.reviewDesc) adminElements.reviewDesc.textContent = vac.description;
         
-        adminElements.reviewReqList.innerHTML = '';
-        vac.requirements.forEach(r => {
-            const li = document.createElement('li');
-            li.textContent = r;
-            adminElements.reviewReqList.appendChild(li);
-        });
+        if (adminElements.reviewReqList) {
+            adminElements.reviewReqList.innerHTML = '';
+            vac.requirements.forEach(r => {
+                const li = document.createElement('li');
+                li.textContent = r;
+                adminElements.reviewReqList.appendChild(li);
+            });
+        }
 
-        adminElements.modalReviewVacancy.style.display = 'flex';
-        setTimeout(() => adminElements.modalReviewVacancy.classList.remove('hidden'), 50);
+        if (adminElements.modalReviewVacancy) {
+            adminElements.modalReviewVacancy.style.display = 'flex';
+            setTimeout(() => adminElements.modalReviewVacancy.classList.remove('hidden'), 50);
+        }
     }
 
     function closeAdminReviewModal() {
-        adminElements.modalReviewVacancy.classList.add('hidden');
-        setTimeout(() => adminElements.modalReviewVacancy.style.display = 'none', 300);
+        if (adminElements.modalReviewVacancy) {
+            adminElements.modalReviewVacancy.classList.add('hidden');
+            setTimeout(() => adminElements.modalReviewVacancy.style.display = 'none', 300);
+        }
     }
 
-    adminElements.btnCloseReview.addEventListener('click', closeAdminReviewModal);
-    adminElements.btnCancelReview.addEventListener('click', closeAdminReviewModal);
+    if (adminElements.btnCloseReview) adminElements.btnCloseReview.addEventListener('click', closeAdminReviewModal);
+    if (adminElements.btnCancelReview) adminElements.btnCancelReview.addEventListener('click', closeAdminReviewModal);
 
     // APROBAR VACANTE (SE MUEVE A "ACTIVA" Y QUEDA VISIBLE PARA ALUMNOS)
-    adminElements.btnApproveVacancy.addEventListener('click', () => {
-        if (!activeAdminVacancy) return;
+    if (adminElements.btnApproveVacancy) {
+        adminElements.btnApproveVacancy.addEventListener('click', () => {
+            if (!activeAdminVacancy) return;
 
-        // Remover de la lista de pendientes
-        const idx = pendingVacancies.findIndex(v => v.id === activeAdminVacancy.id);
-        if (idx !== -1) {
-            pendingVacancies.splice(idx, 1);
-        }
+            // Remover de la lista de pendientes
+            const idx = pendingVacancies.findIndex(v => v.id === activeAdminVacancy.id);
+            if (idx !== -1) {
+                pendingVacancies.splice(idx, 1);
+            }
 
-        // Agregar al catálogo general activo en estado "Activa"
-        activeAdminVacancy.status = 'Activa';
-        vacancies.unshift(activeAdminVacancy);
+            // Agregar al catálogo general activo en estado "Activa"
+            activeAdminVacancy.status = 'Activa';
+            vacancies.unshift(activeAdminVacancy);
 
-        closeAdminReviewModal();
-        showToast('¡Vacante aprobada y publicada en el catálogo estudiantil!');
-        renderAdminVacancies();
-    });
+            closeAdminReviewModal();
+            showToast('¡Vacante aprobada y publicada en el catálogo estudiantil!');
+            renderAdminVacancies();
+        });
+    }
 
     // RECHAZAR VACANTE (SE REMOVE DE LA COLA)
-    adminElements.btnRejectVacancy.addEventListener('click', () => {
-        if (!activeAdminVacancy) return;
+    if (adminElements.btnRejectVacancy) {
+        adminElements.btnRejectVacancy.addEventListener('click', () => {
+            if (!activeAdminVacancy) return;
 
-        const idx = pendingVacancies.findIndex(v => v.id === activeAdminVacancy.id);
-        if (idx !== -1) {
-            pendingVacancies.splice(idx, 1);
-        }
+            const idx = pendingVacancies.findIndex(v => v.id === activeAdminVacancy.id);
+            if (idx !== -1) {
+                pendingVacancies.splice(idx, 1);
+            }
 
-        closeAdminReviewModal();
-        showToast('Solicitud de vacante rechazada', true);
-        renderAdminVacancies();
-    });
+            closeAdminReviewModal();
+            showToast('Solicitud de vacante rechazada', true);
+            renderAdminVacancies();
+        });
+    }
 
     // RENDERIZAR DIRECTORIO DE EMPRESAS (ADMIN)
     function renderAdminCompanies() {
@@ -1554,52 +1568,67 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Buscador en panel de empresas
-    adminElements.searchCompanies.addEventListener('input', renderAdminCompanies);
+    if (adminElements.searchCompanies) {
+        adminElements.searchCompanies.addEventListener('input', renderAdminCompanies);
+    }
 
     // Eventos de los filtros de estado (Tabs)
-    adminElements.statusFilters.querySelectorAll('.filter-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            adminElements.statusFilters.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            renderAdminCompanies();
+    if (adminElements.statusFilters) {
+        adminElements.statusFilters.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                adminElements.statusFilters.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderAdminCompanies();
+            });
         });
-    });
+    }
 
     // POPOVER DE MODERACIÓN DE CONVENIOS (EMPRESA EN PANEL ADMIN)
-    adminElements.popoverCompany.querySelectorAll('[data-status]').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const status = item.getAttribute('data-status');
-            
-            if (activeAdminCompany) {
-                activeAdminCompany.status = status;
-                showToast(`Convenio de ${activeAdminCompany.name} actualizado a: ${status}`);
-                adminElements.popoverCompany.classList.add('hidden');
-                renderAdminCompanies();
-            }
+    if (adminElements.popoverCompany) {
+        adminElements.popoverCompany.querySelectorAll('[data-status]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const status = item.getAttribute('data-status');
+                
+                if (activeAdminCompany) {
+                    activeAdminCompany.status = status;
+                    showToast(`Convenio de ${activeAdminCompany.name} actualizado a: ${status}`);
+                    adminElements.popoverCompany.classList.add('hidden');
+                    renderAdminCompanies();
+                }
+            });
         });
-    });
+    }
 
     document.addEventListener('click', () => {
-        adminElements.popoverCompany.classList.add('hidden');
+        if (adminElements.popoverCompany) {
+            adminElements.popoverCompany.classList.add('hidden');
+        }
     });
 
     // MODAL REGISTRAR NUEVA EMPRESA
-    adminElements.btnCreateCompany.addEventListener('click', () => {
-        adminElements.formCreateCompany.reset();
-        adminElements.modalCreateCompany.style.display = 'flex';
-        setTimeout(() => adminElements.modalCreateCompany.classList.remove('hidden'), 50);
-    });
-
-    function closeCreateCompanyModal() {
-        adminElements.modalCreateCompany.classList.add('hidden');
-        setTimeout(() => adminElements.modalCreateCompany.style.display = 'none', 300);
+    if (adminElements.btnCreateCompany) {
+        adminElements.btnCreateCompany.addEventListener('click', () => {
+            if (adminElements.formCreateCompany) adminElements.formCreateCompany.reset();
+            if (adminElements.modalCreateCompany) {
+                adminElements.modalCreateCompany.style.display = 'flex';
+                setTimeout(() => adminElements.modalCreateCompany.classList.remove('hidden'), 50);
+            }
+        });
     }
 
-    adminElements.btnCloseModalCompany.addEventListener('click', closeCreateCompanyModal);
-    adminElements.btnCancelModalCompany.addEventListener('click', closeCreateCompanyModal);
+    function closeCreateCompanyModal() {
+        if (adminElements.modalCreateCompany) {
+            adminElements.modalCreateCompany.classList.add('hidden');
+            setTimeout(() => adminElements.modalCreateCompany.style.display = 'none', 300);
+        }
+    }
 
-    adminElements.btnSaveCompany.addEventListener('click', (e) => {
+    if (adminElements.btnCloseModalCompany) adminElements.btnCloseModalCompany.addEventListener('click', closeCreateCompanyModal);
+    if (adminElements.btnCancelModalCompany) adminElements.btnCancelModalCompany.addEventListener('click', closeCreateCompanyModal);
+
+    if (adminElements.btnSaveCompany) {
+        adminElements.btnSaveCompany.addEventListener('click', (e) => {
         e.preventDefault();
 
         const name = document.getElementById('admin-comp-name').value.trim();
@@ -1626,7 +1655,8 @@ document.addEventListener('DOMContentLoaded', () => {
         closeCreateCompanyModal();
         showToast(`¡Empresa ${name} registrada con éxito!`);
         renderAdminCompanies();
-    });
+        });
+    }
 
 
     // === CONTROLADOR DE ACCESO DIRECTO (DEMO BTNS) ===
